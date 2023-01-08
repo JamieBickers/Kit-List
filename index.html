@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    </head>
+<body>
+    <h1>Kit List</h1>
+    <div id="categories-element"></div>
+    <hr/>
+    <div id="items-list"></div>
+</body>
+<script>
+    let categories =
+    [
+        "Sport Climbing",
+        "Bouldering",
+        "Trad Climbing",
+        "Winter Climbing",
+        "Winter Walking",
+        "Trail Running",
+        "Skiing",
+        "Overnight"
+    ];
+
+    let items =
+    [
+        {name: "Base Clothing", categories: ["Sport Climbing", "Bouldering", "Trad Climbing", "Winter Climbing", "Winter Walking", "Trail Running", "Skiing"]},
+        {name: "Helmet", categories: ["Sport Climbing", "Trad Climbing", "Winter Climbing", "Winter Walking", "Skiing"]},
+        {name: "Rock Shoes", categories: ["Sport Climbing", "Bouldering", "Trad Climbing"]},
+        {name: "Harness", categories: ["Sport Climbing", "Trad Climbing", "Winter Climbing"]},
+        {name: "Belay Device", categories: ["Sport Climbing", "Trad Climbing", "Winter Climbing"]},
+        {name: "Chalk Bag", categories: ["Sport Climbing", "Bouldering", "Trad Climbing"]},
+        {name: "Ropes", categories: ["Sport Climbing", "Trad Climbing", "Winter Climbing"]},
+        {name: "Rack", categories: ["Sport Climbing", "Trad Climbing", "Winter Climbing"]},
+        {name: "Waterproof Jacket", categories: ["Sport Climbing", "Bouldering", "Trad Climbing", "Winter Climbing", "Winter Walking", "Trail Running", "Skiing"]},
+        {name: "Waterproof Trousers", categories: ["Sport Climbing", "Bouldering", "Trad Climbing", "Winter Climbing", "Winter Walking", "Trail Running", "Skiing"]},
+        {name: "Boots/Approach Shoes", categories: ["Sport Climbing", "Bouldering", "Trad Climbing", "Winter Climbing", "Winter Walking"]},
+        {name: "Fleece/Synthetic Layer", categories: ["Sport Climbing", "Bouldering", "Trad Climbing", "Winter Climbing", "Winter Walking", "Trail Running", "Skiing"]},
+        {name: "Gloves", categories: ["Sport Climbing", "Bouldering", "Trad Climbing", "Winter Climbing", "Winter Walking", "Trail Running", "Skiing"]},
+        {name: "Puffy Jacket", categories: ["Sport Climbing", "Bouldering", "Trad Climbing", "Winter Climbing", "Winter Walking", "Skiing"]},
+        {name: "Rucksack", categories: ["Sport Climbing", "Bouldering", "Trad Climbing", "Winter Climbing", "Winter Walking", "Skiing"]},
+        {name: "Food", categories: ["Sport Climbing", "Bouldering", "Trad Climbing", "Winter Climbing", "Winter Walking", "Trail Running", "Skiing"]},
+        {name: "Suncream", categories: ["Sport Climbing", "Bouldering", "Trad Climbing", "Trail Running"]},
+        {name: "Insect repellant and midge net", categories: ["Sport Climbing", "Bouldering", "Trad Climbing", "Trail Running"]},
+        {name: "Waterproof Phone Case", categories: ["Sport Climbing", "Bouldering", "Trad Climbing", "Winter Climbing", "Winter Walking", "Trail Running", "Skiing"]},
+        {name: "Water Bottle", categories: ["Sport Climbing", "Bouldering", "Trad Climbing", "Winter Climbing", "Winter Walking", "Trail Running", "Skiing"]},
+        {name: "Headtorch", categories: ["Sport Climbing", "Bouldering", "Trad Climbing", "Winter Climbing", "Winter Walking", "Trail Running", "Skiing"]},
+        {name: "Guidebook", categories: ["Sport Climbing", "Bouldering", "Trad Climbing", "Winter Climbing"]},
+        {name: "Small first aid kit", categories: ["Sport Climbing", "Bouldering", "Trad Climbing", "Winter Climbing", "Winter Walking", "Trail Running", "Skiing"]},
+        {name: "Map", categories: ["Sport Climbing", "Bouldering", "Trad Climbing", "Winter Climbing", "Winter Walking", "Trail Running", "Skiing"]},
+        {name: "Compass", categories: ["Sport Climbing", "Bouldering", "Trad Climbing", "Winter Climbing", "Winter Walking", "Trail Running", "Skiing"]},
+        {name: "Group shelter", categories: ["Trad Climbing", "Winter Climbing", "Winter Walking", "Skiing"]},
+        {name: "Sunglasses", categories: ["Sport Climbing", "Bouldering", "Trad Climbing", "Trail Running"]},
+        {name: "Bouldering Mat", categories: ["Bouldering"]},
+        {name: "Battery pack", categories: ["Sport Climbing", "Bouldering", "Trad Climbing", "Winter Climbing", "Winter Walking", "Trail Running", "Skiing"]},
+        {name: "Teatowel", categories: ["Sport Climbing", "Bouldering", "Trad Climbing"]},
+        {name: "Clipstick", categories: ["Sport Climbing"]},
+        {name: "Buff", categories: ["Sport Climbing", "Bouldering", "Trad Climbing", "Winter Climbing", "Winter Walking", "Trail Running", "Skiing"]},
+        {name: "Brushes", categories: ["Sport Climbing", "Bouldering", "Trad Climbing"]},
+        {name: "Liquid chalk", categories: ["Sport Climbing", "Bouldering", "Trad Climbing"]},
+        {name: "Body glide", categories: ["Trad Climbing", "Winter Climbing", "Winter Walking", "Trail Running", "Skiing"]},
+
+        {name: "Axes", categories: ["Winter Climbing", "Winter Walking", "Skiing"]},
+        {name: "Crampons", categories: ["Winter Climbing", "Winter Walking", "Skiing"]},
+        {name: "Lanyards", categories: ["Winter Climbing", "Winter Walking", "Skiing"]},
+        {name: "Goggles", categories: ["Winter Climbing", "Winter Walking", "Skiing"]},
+        {name: "Running socks", categories: ["Winter Climbing", "Trail Running"]},
+        {name: "Ski socks", categories: ["Skiing"]},
+        {name: "Ski Boots", categories: ["Skiing"]},
+        {name: "Other Boots/Shoes", categories: ["Skiing"]},
+        {name: "Skis", categories: ["Skiing"]},
+        {name: "Poles", categories: ["Skiing"]},
+        {name: "Skins", categories: ["Skiing"]},
+        {name: "Shovel - 2 Parts", categories: ["Skiing"]},
+        {name: "Probe", categories: ["Skiing"]},
+        {name: "Beacon - Check Battery", categories: ["Skiing"]},
+        {name: "Ski Strap", categories: ["Skiing"]},
+
+        {name: "Sleeping Bag", categories: ["Overnight"]},
+        {name: "Rollmat", categories: ["Overnight"]},
+        {name: "Tent", categories: ["Overnight"]},
+        {name: "Wash Kit", categories: ["Overnight"]},
+        {name: "Drugs", categories: ["Overnight"]},
+        {name: "Contact Lenses", categories: ["Overnight"]},
+        {name: "Toothbrush", categories: ["Overnight"]},
+        {name: "Spare Technical Clothes", categories: ["Overnight"]},
+        {name: "Casual Clothes", categories: ["Overnight"]},
+        {name: "Charger ", categories: ["Overnight"]},
+        {name: "Towel", categories: ["Overnight"]},
+        {name: "Shower gel", categories: ["Overnight"]},
+
+        {name: "Running shoes", categories: ["Trail Running"]},
+        {name: "Vest", categories: ["Trail Running"]},
+        {name: "Softshell", categories: ["Trail Running"]},
+    ];
+
+    renderCategories();
+
+    function renderCategories()
+    {
+        categoriesElement = document.getElementById("categories-element");
+        for (let i = 0; i < categories.length; i++)
+        {
+            let categoryName = document.createElement("span");
+            categoryName.textContent = categories[i];
+
+            let categoryButton = document.createElement("input");
+            categoryButton.id = categories[i];
+            categoryButton.classList.add("checkbox");
+            categoryButton.setAttribute("type", "checkbox");
+            categoryButton.addEventListener("change", computeList);
+
+            let categoryElement = document.createElement("p");
+            categoryElement.appendChild(categoryName);
+            categoryElement.appendChild(categoryButton);
+
+            categoriesElement.appendChild(categoryElement);
+        }
+    }
+
+    function computeList()
+    {
+        let itemsList = [];
+        let checkboxes = document.getElementsByClassName("checkbox");
+        for (let i = 0; i < checkboxes.length; i++)
+        {
+            let checkbox = checkboxes[i];
+            let include = checkbox.checked;
+            let category = checkbox.id;
+
+            if (include)
+            {
+                itemsList = itemsList.concat(getItemsForCategory(category));
+            }
+        }
+
+        renderList([...new Set(itemsList)]);
+    }
+
+    function getItemsForCategory(category)
+    {
+        let itemsList = [];
+        for (let i = 0; i < items.length; i++)
+        {
+            for (let j = 0; j < items[i].categories.length; j++)
+            {
+                if (items[i].categories[j] === category)
+                {
+                    itemsList.push(items[i].name);
+                }
+            }
+        }
+
+        return itemsList;
+    }
+
+    function renderList(itemsList)
+    {
+        console.log(itemsList)
+        itemsListElement = document.getElementById("items-list");
+        itemsListElement.innerHTML = "";
+        for (let i = 0; i < itemsList.length; i++)
+        {
+            let newItem = document.createElement("p");
+            newItem.textContent = itemsList[i];
+            itemsListElement.appendChild(newItem);
+        }
+    }
+</script>
+</html>
