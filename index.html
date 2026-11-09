@@ -109,6 +109,8 @@
         {name: "Charger ", categories: ["Overnight"]},
         {name: "Towel", categories: ["Overnight"]},
         {name: "Shower gel", categories: ["Overnight"]},
+        {name: "Earplugs", categories: ["Overnight"], emilyOnly: true},
+        {name: "Hairtie and hairbrush", categories: ["Overnight"], emilyOnly: true},
 
         {name: "Running shoes", categories: ["Trail Running"]},
         {name: "Vest", categories: ["Trail Running"]},
@@ -131,7 +133,18 @@
         {name: "Bedding", categories: ["Abroad"]},
         {name: "Cables", categories: ["Abroad"]},
         {name: "GHIC", categories: ["Abroad"]},
+        {name: "Check insurance", categories: ["Abroad"]},
+        {name: "Adaptor", categories: ["Abroad"]},
+        {name: "Driving license - check in date", categories: ["Abroad"], emilyOnly: true},
+        {name: "GHIC - check in date", categories: ["Abroad"], emilyOnly: true},
+        {name: "Monzo joint card - check card number", categories: ["Abroad"], emilyOnly: true},
+        {name: "Monzo debit card - check card number", categories: ["Abroad"], emilyOnly: true},
+        {name: "Credit card - check card number", categories: ["Abroad"], emilyOnly: true},
     ];
+
+    // Items flagged emilyOnly are only shown when the URL contains an "Emily" query parameter, e.g. index.html?Emily
+    let showEmilyItems = Array.from(new URLSearchParams(window.location.search).keys())
+        .some(key => key.toLowerCase() === "emily");
 
     renderCategories();
 
@@ -181,6 +194,11 @@
         let itemsList = [];
         for (let i = 0; i < items.length; i++)
         {
+            if (items[i].emilyOnly && !showEmilyItems)
+            {
+                continue;
+            }
+
             for (let j = 0; j < items[i].categories.length; j++)
             {
                 if (items[i].categories[j] === category)
